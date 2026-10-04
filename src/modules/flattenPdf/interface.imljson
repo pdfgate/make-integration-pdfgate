@@ -1,0 +1,47 @@
+[
+  {
+    "name": "documentId",
+    "type": "text",
+    "label": "Document ID"
+  },
+  {
+    "name": "status",
+    "type": "text",
+    "label": "Status"
+  },
+  {
+    "name": "type",
+    "type": "text",
+    "label": "Type"
+  },
+  {
+    "name": "fileUrl",
+    "type": "url",
+    "label": "File URL"
+  },
+  {
+    "name": "size",
+    "type": "number",
+    "label": "Size (Bytes)"
+  },
+  {
+    "name": "metadata",
+    "type": "collection",
+    "label": "Metadata"
+  },
+  {
+    "name": "derivedFrom",
+    "type": "text",
+    "label": "Derived From Document ID"
+  },
+  {
+    "name": "createdAt",
+    "type": "date",
+    "label": "Created At"
+  },
+  {
+    "name": "expiresAt",
+    "type": "date",
+    "label": "Expires At"
+  }
+]

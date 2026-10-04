@@ -1,0 +1,20 @@
+{
+  "url": "/document/{{parameters.documentId}}",
+  "method": "GET",
+  "qs": {
+    "preSignedUrlExpiresIn": "{{parameters.preSignedUrlExpiresIn}}"
+  },
+  "response": {
+    "output": {
+      "documentId": "{{body.id}}",
+      "status": "{{body.status}}",
+      "type": "{{body.type}}",
+      "fileUrl": "{{body.fileUrl}}",
+      "size": "{{body.size}}",
+      "metadata": "{{body.metadata}}",
+      "derivedFrom": "{{body.derivedFrom}}",
+      "createdAt": "{{body.createdAt}}",
+      "expiresAt": "{{body.expiresAt}}"
+    }
+  }
+}

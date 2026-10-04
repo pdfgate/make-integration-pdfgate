@@ -1,0 +1,53 @@
+{
+  "url": "/v1/generate/pdf",
+  "method": "POST",
+  "body": {
+    "url": "{{parameters.url}}",
+    "html": "{{parameters.html}}",
+    "pageSizeType": "{{parameters.pageSizeType}}",
+    "width": "{{parameters.width}}",
+    "height": "{{parameters.height}}",
+    "orientation": "{{parameters.orientation}}",
+    "printBackground": "{{parameters.printBackground}}",
+    "enableFormFields": "{{parameters.enableFormFields}}",
+    "scale": "{{parameters.scale}}",
+    "pageRanges": "{{parameters.pageRanges}}",
+    "header": "{{parameters.header}}",
+    "footer": "{{parameters.footer}}",
+    "margin": {
+      "top": "{{parameters.marginTop}}",
+      "bottom": "{{parameters.marginBottom}}",
+      "left": "{{parameters.marginLeft}}",
+      "right": "{{parameters.marginRight}}"
+    },
+    "emulateMediaType": "{{parameters.emulateMediaType}}",
+    "css": "{{parameters.css}}",
+    "javascript": "{{parameters.javascript}}",
+    "waitForSelector": "{{parameters.waitForSelector}}",
+    "clickSelector": "{{parameters.clickSelector}}",
+    "waitForNetworkIdle": "{{parameters.waitForNetworkIdle}}",
+    "loadImages": "{{parameters.loadImages}}",
+    "delay": "{{parameters.delay}}",
+    "timeout": "{{parameters.timeout}}",
+    "viewport": "{{if(parameters.viewport.width, if(parameters.viewport.height, parameters.viewport))}}",
+    "userAgent": "{{parameters.userAgent}}",
+    "httpHeaders": "{{toCollection(parameters.httpHeaders, 'key', 'value')}}",
+    "authentication": "{{if(parameters.authentication.username, parameters.authentication)}}",
+    "metadata": "{{toCollection(parameters.metadata, 'key', 'value')}}",
+    "preSignedUrlExpiresIn": "{{parameters.preSignedUrlExpiresIn}}",
+    "jsonResponse": true
+  },
+  "response": {
+    "output": {
+      "documentId": "{{body.id}}",
+      "status": "{{body.status}}",
+      "type": "{{body.type}}",
+      "fileUrl": "{{body.fileUrl}}",
+      "size": "{{body.size}}",
+      "metadata": "{{body.metadata}}",
+      "derivedFrom": "{{body.derivedFrom}}",
+      "createdAt": "{{body.createdAt}}",
+      "expiresAt": "{{body.expiresAt}}"
+    }
+  }
+}

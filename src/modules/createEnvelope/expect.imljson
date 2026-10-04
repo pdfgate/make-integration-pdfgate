@@ -1,0 +1,84 @@
+[
+  {
+    "name": "requesterName",
+    "type": "text",
+    "label": "Requester Name",
+    "required": true,
+    "help": "Name of the person or system creating the envelope."
+  },
+  {
+    "name": "documents",
+    "type": "array",
+    "label": "Documents",
+    "required": true,
+    "help": "Documents to include in the signing envelope.",
+    "spec": [
+      {
+        "name": "sourceDocumentId",
+        "type": "text",
+        "label": "Source Document ID",
+        "required": true,
+        "help": "ID of an existing PDFGate document."
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "label": "Document Name",
+        "required": true,
+        "help": "Display name for this document inside the envelope."
+      },
+      {
+        "name": "recipients",
+        "type": "array",
+        "label": "Recipients",
+        "required": true,
+        "spec": [
+          { "name": "email", "type": "email", "label": "Email", "required": true },
+          { "name": "name", "type": "text", "label": "Name", "required": true },
+          {
+            "name": "role",
+            "type": "text",
+            "label": "Role",
+            "help": "Assign a role to this recipient. With a single recipient this can be left empty."
+          },
+          {
+            "name": "reminderIntervalDays",
+            "type": "number",
+            "label": "Reminder Interval Days",
+            "help": "Days between signing reminder emails. Set 0 to disable. Empty = default (2 days)."
+          },
+          {
+            "name": "reminderAttempts",
+            "type": "number",
+            "label": "Reminder Attempts",
+            "help": "Maximum number of reminder emails to send."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "metadata",
+    "type": "array",
+    "label": "Metadata",
+    "help": "Custom key-value metadata stored with the document.",
+    "spec": {
+      "type": "collection",
+      "label": "Metadata Entry",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value",
+          "required": true
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "envelopeId",
+    "type": "text",
+    "label": "Envelope ID",
+    "required": true,
+    "help": "ID of the envelope to send to its recipients."
+  }
+]

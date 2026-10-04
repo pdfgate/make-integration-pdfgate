@@ -1,0 +1,21 @@
+{
+  "temp": {
+    "signature": "{{lower(ifempty(headers.`x-pdfgate-signature`, ''))}}"
+  },
+  "condition": "{{if(data.secret && temp.signature, contains(temp.signature, 'v1=' + sha256(substring(temp.signature, 2, indexOf(temp.signature, ',')) + '.' + createJSON(body), 'hex', data.secret)), false)}}",
+  "respond": {
+    "status": "{{if(if(data.secret && temp.signature, contains(temp.signature, 'v1=' + sha256(substring(temp.signature, 2, indexOf(temp.signature, ',')) + '.' + createJSON(body), 'hex', data.secret)), false), 200, 400)}}",
+    "type": "json",
+    "body": {
+      "message": "{{if(if(data.secret && temp.signature, contains(temp.signature, 'v1=' + sha256(substring(temp.signature, 2, indexOf(temp.signature, ',')) + '.' + createJSON(body), 'hex', data.secret)), false), 'OK', 'Invalid signature')}}"
+    }
+  },
+  "output": {
+    "eventId": "{{body.eventId}}",
+    "event": "{{body.event}}",
+    "timestamp": "{{body.timestamp}}",
+    "envelopeId": "{{body.resource.id}}",
+    "resource": "{{body.resource}}",
+    "data": "{{body.data}}"
+  }
+}

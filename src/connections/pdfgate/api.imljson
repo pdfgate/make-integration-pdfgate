@@ -1,0 +1,15 @@
+{
+  "url": "{{if(substring(parameters.apiKey, 0, 5) = \"test_\", \"https://api-sandbox.pdfgate.com\", \"https://api.pdfgate.com\")}}/auth",
+  "method": "GET",
+  "headers": {
+    "authorization": "Bearer {{parameters.apiKey}}"
+  },
+  "response": {
+    "error": {
+      "message": "Invalid PDFGate API key ([{{statusCode}}])."
+    }
+  },
+  "log": {
+    "sanitize": ["request.headers.authorization"]
+  }
+}

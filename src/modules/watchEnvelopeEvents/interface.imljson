@@ -1,0 +1,278 @@
+[
+  {
+    "name": "eventId",
+    "type": "text",
+    "label": "Event ID"
+  },
+  {
+    "name": "event",
+    "type": "text",
+    "label": "Event"
+  },
+  {
+    "name": "timestamp",
+    "type": "date",
+    "label": "Timestamp"
+  },
+  {
+    "name": "envelopeId",
+    "type": "text",
+    "label": "Envelope ID"
+  },
+  {
+    "name": "resource",
+    "type": "collection",
+    "label": "Resource",
+    "spec": [
+      {
+        "name": "kind",
+        "type": "text",
+        "label": "Kind"
+      },
+      {
+        "name": "id",
+        "type": "text",
+        "label": "ID"
+      }
+    ]
+  },
+  {
+    "name": "data",
+    "type": "collection",
+    "label": "Data",
+    "spec": [
+      {
+        "name": "envelope",
+        "type": "collection",
+        "label": "Envelope",
+        "spec": [
+          {
+            "name": "id",
+            "type": "text",
+            "label": "Envelope ID"
+          },
+          {
+            "name": "status",
+            "type": "text",
+            "label": "Status"
+          },
+          {
+            "name": "documents",
+            "type": "array",
+            "label": "Documents",
+            "spec": {
+              "type": "collection",
+              "spec": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "label": "Name"
+                },
+                {
+                  "name": "sourceDocumentId",
+                  "type": "text",
+                  "label": "Source Document ID"
+                },
+                {
+                  "name": "signedDocumentId",
+                  "type": "text",
+                  "label": "Signed Document ID"
+                },
+                {
+                  "name": "auditLogDocumentId",
+                  "type": "text",
+                  "label": "Audit Log Document ID"
+                },
+                {
+                  "name": "status",
+                  "type": "text",
+                  "label": "Status"
+                },
+                {
+                  "name": "completedAt",
+                  "type": "date",
+                  "label": "Completed At"
+                },
+                {
+                  "name": "recipients",
+                  "type": "array",
+                  "label": "Recipients",
+                  "spec": {
+                    "type": "collection",
+                    "spec": [
+                      {
+                        "name": "recipientId",
+                        "type": "text",
+                        "label": "Recipient ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "email",
+                        "type": "email",
+                        "label": "Email"
+                      },
+                      {
+                        "name": "embedded",
+                        "type": "boolean",
+                        "label": "Embedded"
+                      },
+                      {
+                        "name": "signingOrder",
+                        "type": "number",
+                        "label": "Signing Order"
+                      },
+                      {
+                        "name": "status",
+                        "type": "text",
+                        "label": "Status"
+                      },
+                      {
+                        "name": "activatedAt",
+                        "type": "date",
+                        "label": "Activated At"
+                      },
+                      {
+                        "name": "viewedAt",
+                        "type": "date",
+                        "label": "Viewed At"
+                      },
+                      {
+                        "name": "signedAt",
+                        "type": "date",
+                        "label": "Signed At"
+                      },
+                      {
+                        "name": "signingLink",
+                        "type": "url",
+                        "label": "Signing Link"
+                      },
+                      {
+                        "name": "previewLink",
+                        "type": "url",
+                        "label": "Preview Link"
+                      },
+                      {
+                        "name": "fields",
+                        "type": "array",
+                        "label": "Fields",
+                        "spec": {
+                          "type": "collection",
+                          "spec": [
+                            {
+                              "name": "name",
+                              "type": "text",
+                              "label": "Name"
+                            },
+                            {
+                              "name": "type",
+                              "type": "text",
+                              "label": "Type"
+                            },
+                            {
+                              "name": "value",
+                              "type": "any",
+                              "label": "Value"
+                            },
+                            {
+                              "name": "checked",
+                              "type": "boolean",
+                              "label": "Checked"
+                            },
+                            {
+                              "name": "timezone",
+                              "type": "text",
+                              "label": "Timezone"
+                            },
+                            {
+                              "name": "source",
+                              "type": "text",
+                              "label": "Source"
+                            },
+                            {
+                              "name": "userValue",
+                              "type": "text",
+                              "label": "User Value"
+                            },
+                            {
+                              "name": "userTimezone",
+                              "type": "text",
+                              "label": "User Timezone"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "createdAt",
+            "type": "date",
+            "label": "Created At"
+          },
+          {
+            "name": "expiresAt",
+            "type": "date",
+            "label": "Expires At"
+          },
+          {
+            "name": "completedAt",
+            "type": "date",
+            "label": "Completed At"
+          },
+          {
+            "name": "expiredAt",
+            "type": "date",
+            "label": "Expired At"
+          },
+          {
+            "name": "voidedAt",
+            "type": "date",
+            "label": "Voided At"
+          },
+          {
+            "name": "voidReason",
+            "type": "text",
+            "label": "Void Reason"
+          },
+          {
+            "name": "metadata",
+            "type": "collection",
+            "label": "Metadata"
+          }
+        ]
+      },
+      {
+        "name": "envelopeId",
+        "type": "text",
+        "label": "Envelope ID (Document Completed)"
+      },
+      {
+        "name": "sourceDocumentId",
+        "type": "text",
+        "label": "Source Document ID (Document Completed)"
+      },
+      {
+        "name": "signedDocumentId",
+        "type": "text",
+        "label": "Signed Document ID (Document Completed)"
+      },
+      {
+        "name": "auditLogDocumentId",
+        "type": "text",
+        "label": "Audit Log Document ID (Document Completed)"
+      },
+      {
+        "name": "documentStatus",
+        "type": "text",
+        "label": "Document Status (Document Completed)"
+      }
+    ]
+  }
+]

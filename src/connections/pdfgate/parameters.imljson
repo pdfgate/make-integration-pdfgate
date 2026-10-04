@@ -1,0 +1,9 @@
+[
+  {
+    "name": "apiKey",
+    "type": "text",
+    "label": "API Key",
+    "required": true,
+    "help": "Your PDFGate API key. Keys starting with `test_` use the sandbox (no live usage is billed); `live_` keys call production. Find yours in the PDFGate dashboard."
+  }
+]

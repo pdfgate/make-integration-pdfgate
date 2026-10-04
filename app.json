@@ -1,0 +1,10 @@
+{
+  "name": "pdfgate",
+  "label": "PDFGate",
+  "version": 1,
+  "description": "Generate, process, and e-sign PDFs with PDFGate.",
+  "theme": "#0055d4",
+  "language": "en",
+  "audience": "global",
+  "private": true
+}

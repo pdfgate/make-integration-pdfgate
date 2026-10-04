@@ -1,0 +1,7 @@
+{
+  "url": "/document/{{parameters.documentId}}",
+  "method": "DELETE",
+  "response": {
+    "output": "{{body}}"
+  }
+}

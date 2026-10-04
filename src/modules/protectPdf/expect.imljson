@@ -1,0 +1,66 @@
+[
+  {
+    "name": "documentId",
+    "type": "text",
+    "label": "Document ID",
+    "required": true,
+    "help": "ID of the PDFGate document to encrypt."
+  },
+  {
+    "name": "algorithm",
+    "type": "select",
+    "label": "Encryption Algorithm",
+    "default": "AES256",
+    "options": [
+      { "label": "AES-256 (Recommended)", "value": "AES256" },
+      { "label": "AES-128", "value": "AES128" }
+    ]
+  },
+  {
+    "name": "userPassword",
+    "type": "text",
+    "label": "User Password",
+    "help": "Password required to open the PDF."
+  },
+  {
+    "name": "ownerPassword",
+    "type": "text",
+    "label": "Owner Password",
+    "help": "Password that grants full control (modifying permissions, removing restrictions)."
+  },
+  { "name": "disableEditing", "type": "boolean", "label": "Disable Editing", "default": false },
+  { "name": "disableCopy", "type": "boolean", "label": "Disable Copy / Extract", "default": false },
+  { "name": "disablePrint", "type": "boolean", "label": "Disable Printing", "default": false },
+  { "name": "encryptMetadata", "type": "boolean", "label": "Encrypt Metadata", "default": false },
+  {
+    "name": "metadata",
+    "type": "array",
+    "label": "Metadata",
+    "help": "Custom key-value metadata stored with the document.",
+    "spec": {
+      "type": "collection",
+      "label": "Metadata Entry",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value",
+          "required": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "preSignedUrlExpiresIn",
+    "type": "number",
+    "label": "Pre-Signed URL Expiry (Seconds)",
+    "default": 3600,
+    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+  }
+]

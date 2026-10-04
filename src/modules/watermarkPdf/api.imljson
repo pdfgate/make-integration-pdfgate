@@ -1,0 +1,32 @@
+{
+  "url": "/watermark/pdf",
+  "method": "POST",
+  "body": {
+    "documentId": "{{parameters.documentId}}",
+    "text": "{{parameters.text}}",
+    "type": "text",
+    "font": "{{parameters.font}}",
+    "fontSize": "{{parameters.fontSize}}",
+    "fontColor": "{{parameters.fontColor}}",
+    "opacity": "{{parameters.opacity}}",
+    "rotate": "{{parameters.rotate}}",
+    "xPosition": "{{parameters.xPosition}}",
+    "yPosition": "{{parameters.yPosition}}",
+    "metadata": "{{toCollection(parameters.metadata, 'key', 'value')}}",
+    "preSignedUrlExpiresIn": "{{parameters.preSignedUrlExpiresIn}}",
+    "jsonResponse": true
+  },
+  "response": {
+    "output": {
+      "documentId": "{{body.id}}",
+      "status": "{{body.status}}",
+      "type": "{{body.type}}",
+      "fileUrl": "{{body.fileUrl}}",
+      "size": "{{body.size}}",
+      "metadata": "{{body.metadata}}",
+      "derivedFrom": "{{body.derivedFrom}}",
+      "createdAt": "{{body.createdAt}}",
+      "expiresAt": "{{body.expiresAt}}"
+    }
+  }
+}

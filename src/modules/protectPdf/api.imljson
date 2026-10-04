@@ -1,0 +1,30 @@
+{
+  "url": "/protect/pdf",
+  "method": "POST",
+  "body": {
+    "documentId": "{{parameters.documentId}}",
+    "algorithm": "{{parameters.algorithm}}",
+    "userPassword": "{{parameters.userPassword}}",
+    "ownerPassword": "{{parameters.ownerPassword}}",
+    "disableEditing": "{{parameters.disableEditing}}",
+    "disableCopy": "{{parameters.disableCopy}}",
+    "disablePrint": "{{parameters.disablePrint}}",
+    "encryptMetadata": "{{parameters.encryptMetadata}}",
+    "metadata": "{{toCollection(parameters.metadata, 'key', 'value')}}",
+    "preSignedUrlExpiresIn": "{{parameters.preSignedUrlExpiresIn}}",
+    "jsonResponse": true
+  },
+  "response": {
+    "output": {
+      "documentId": "{{body.id}}",
+      "status": "{{body.status}}",
+      "type": "{{body.type}}",
+      "fileUrl": "{{body.fileUrl}}",
+      "size": "{{body.size}}",
+      "metadata": "{{body.metadata}}",
+      "derivedFrom": "{{body.derivedFrom}}",
+      "createdAt": "{{body.createdAt}}",
+      "expiresAt": "{{body.expiresAt}}"
+    }
+  }
+}

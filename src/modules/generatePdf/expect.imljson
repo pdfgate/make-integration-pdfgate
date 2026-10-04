@@ -1,0 +1,360 @@
+[
+  {
+    "name": "url",
+    "type": "url",
+    "label": "URL",
+    "help": "Public URL to render as a PDF. Required if HTML Content is empty."
+  },
+  {
+    "name": "html",
+    "type": "text",
+    "label": "HTML Content",
+    "help": "Raw HTML markup to convert to a PDF. Required if URL is empty."
+  },
+  {
+    "name": "pageSizeType",
+    "type": "select",
+    "label": "Page Size",
+    "default": "a4",
+    "help": "Ignored when Custom Width and Custom Height are set.",
+    "options": [
+      {
+        "label": "A0",
+        "value": "a0"
+      },
+      {
+        "label": "A1",
+        "value": "a1"
+      },
+      {
+        "label": "A2",
+        "value": "a2"
+      },
+      {
+        "label": "A3",
+        "value": "a3"
+      },
+      {
+        "label": "A4",
+        "value": "a4"
+      },
+      {
+        "label": "A5",
+        "value": "a5"
+      },
+      {
+        "label": "A6",
+        "value": "a6"
+      },
+      {
+        "label": "Ledger",
+        "value": "ledger"
+      },
+      {
+        "label": "Legal",
+        "value": "legal"
+      },
+      {
+        "label": "Letter",
+        "value": "letter"
+      },
+      {
+        "label": "Tabloid",
+        "value": "tabloid"
+      }
+    ]
+  },
+  {
+    "name": "width",
+    "type": "number",
+    "label": "Custom Width (px)",
+    "help": "Custom PDF width in pixels. Must be set together with Custom Height; overrides Page Size."
+  },
+  {
+    "name": "height",
+    "type": "number",
+    "label": "Custom Height (px)",
+    "help": "Custom PDF height in pixels. Must be set together with Custom Width; overrides Page Size."
+  },
+  {
+    "name": "orientation",
+    "type": "select",
+    "label": "Orientation",
+    "default": "portrait",
+    "options": [
+      {
+        "label": "Portrait",
+        "value": "portrait"
+      },
+      {
+        "label": "Landscape",
+        "value": "landscape"
+      }
+    ]
+  },
+  {
+    "name": "printBackground",
+    "type": "boolean",
+    "label": "Print Backgrounds",
+    "default": true,
+    "help": "Include background graphics when enabled."
+  },
+  {
+    "name": "enableFormFields",
+    "type": "boolean",
+    "label": "Enable Fillable Form Fields",
+    "default": false,
+    "help": "Include interactive form fields (text inputs, checkboxes, etc.) in the PDF. Supports standard form tags plus <pdfgate-signature-field /> for digital signatures."
+  },
+  {
+    "name": "scale",
+    "type": "number",
+    "label": "Page Scale",
+    "help": "Page scale factor between 0.1 and 2. Default 1.",
+    "validate": {
+      "min": 0.1,
+      "max": 2
+    }
+  },
+  {
+    "name": "pageRanges",
+    "type": "text",
+    "label": "Page Ranges",
+    "help": "Pages to include, e.g. 1-5 or 1,3,5. Leave empty for all pages.",
+    "validate": {
+      "pattern": "^(\\d+(-\\d+)?)(,\\d+(-\\d+)?)*$"
+    }
+  },
+  {
+    "name": "header",
+    "type": "text",
+    "label": "Header HTML",
+    "help": "HTML rendered as the page header on every page. Requires Margin Top. Supports dynamic classes: date, title, url, pageNumber, totalPages."
+  },
+  {
+    "name": "footer",
+    "type": "text",
+    "label": "Footer HTML",
+    "help": "HTML rendered as the page footer on every page. Requires Margin Bottom (e.g. 80px). Supports dynamic classes: date, title, url, pageNumber, totalPages."
+  },
+  {
+    "name": "marginTop",
+    "type": "text",
+    "label": "Margin Top",
+    "help": "e.g. 20px, 1cm, 10mm"
+  },
+  {
+    "name": "marginBottom",
+    "type": "text",
+    "label": "Margin Bottom",
+    "help": "e.g. 20px, 1cm, 10mm"
+  },
+  {
+    "name": "marginLeft",
+    "type": "text",
+    "label": "Margin Left",
+    "help": "e.g. 20px, 1cm, 10mm"
+  },
+  {
+    "name": "marginRight",
+    "type": "text",
+    "label": "Margin Right",
+    "help": "e.g. 20px, 1cm, 10mm"
+  },
+  {
+    "name": "metadata",
+    "type": "array",
+    "label": "Metadata",
+    "help": "Custom key-value data attached to the document record.",
+    "spec": {
+      "type": "collection",
+      "label": "Metadata Entry",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value",
+          "required": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "preSignedUrlExpiresIn",
+    "type": "number",
+    "label": "Pre-Signed URL Expiry (Seconds)",
+    "default": 3600,
+    "help": "How long the returned fileUrl stays valid (60–86400 seconds).",
+    "validate": {
+      "min": 60,
+      "max": 86400
+    }
+  },
+  {
+    "name": "emulateMediaType",
+    "type": "select",
+    "label": "Emulate Media Type",
+    "advanced": true,
+    "help": "Force a CSS media type when rendering.",
+    "options": [
+      {
+        "label": "Screen",
+        "value": "screen"
+      },
+      {
+        "label": "Print",
+        "value": "print"
+      }
+    ]
+  },
+  {
+    "name": "css",
+    "type": "text",
+    "label": "Inject CSS",
+    "advanced": true,
+    "help": "CSS injected after the page loads and after Wait For / Click Selector actions run."
+  },
+  {
+    "name": "javascript",
+    "type": "text",
+    "label": "Inject JavaScript",
+    "advanced": true,
+    "help": "JavaScript injected after the page loads and after Wait For / Click Selector actions run."
+  },
+  {
+    "name": "waitForSelector",
+    "type": "text",
+    "label": "Wait For CSS Selector",
+    "advanced": true,
+    "help": "Wait for this CSS selector to appear before rendering. Times out after 30 seconds."
+  },
+  {
+    "name": "clickSelector",
+    "type": "text",
+    "label": "Click CSS Selector",
+    "advanced": true,
+    "help": "Wait for and click this CSS selector before rendering."
+  },
+  {
+    "name": "waitForNetworkIdle",
+    "type": "boolean",
+    "label": "Wait For Network Idle",
+    "advanced": true,
+    "default": false,
+    "help": "Wait during page load until there are no open network connections."
+  },
+  {
+    "name": "loadImages",
+    "type": "boolean",
+    "label": "Load Images",
+    "advanced": true,
+    "default": false,
+    "help": "Wait for all images to finish loading before capturing."
+  },
+  {
+    "name": "delay",
+    "type": "number",
+    "label": "Render Delay (ms)",
+    "advanced": true,
+    "help": "Delay in milliseconds before rendering the PDF. Maximum 20000 (20 seconds).",
+    "validate": {
+      "min": 0,
+      "max": 20000
+    }
+  },
+  {
+    "name": "timeout",
+    "type": "number",
+    "label": "Render Timeout (ms)",
+    "advanced": true,
+    "help": "Maximum time in milliseconds to wait for the page to load before the request fails. Default 900000 (15 minutes).",
+    "validate": {
+      "min": 0,
+      "max": 900000
+    }
+  },
+  {
+    "name": "viewport",
+    "type": "collection",
+    "label": "Viewport",
+    "advanced": true,
+    "help": "Visible area of the page before rendering. Set both width and height.",
+    "spec": [
+      {
+        "name": "width",
+        "type": "number",
+        "label": "Width (px)",
+        "validate": {
+          "min": 1,
+          "max": 10000
+        }
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "label": "Height (px)",
+        "validate": {
+          "min": 1,
+          "max": 10000
+        }
+      }
+    ]
+  },
+  {
+    "name": "userAgent",
+    "type": "text",
+    "label": "User Agent",
+    "advanced": true,
+    "help": "Custom user agent string used when fetching the page."
+  },
+  {
+    "name": "httpHeaders",
+    "type": "array",
+    "label": "HTTP Headers",
+    "help": "Custom HTTP headers sent when fetching the page.",
+    "spec": {
+      "type": "collection",
+      "label": "HTTP Headers Entry",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value",
+          "required": true
+        }
+      ]
+    },
+    "advanced": true
+  },
+  {
+    "name": "authentication",
+    "type": "collection",
+    "label": "HTTP Basic Authentication",
+    "advanced": true,
+    "help": "HTTP authentication for protected pages. Only supported when rendering a URL, not raw HTML.",
+    "spec": [
+      {
+        "name": "username",
+        "type": "text",
+        "label": "Username"
+      },
+      {
+        "name": "password",
+        "type": "password",
+        "label": "Password"
+      }
+    ]
+  }
+]

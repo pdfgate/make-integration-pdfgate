@@ -1,0 +1,5 @@
+[
+  { "name": "statusCode", "type": "number", "label": "Status Code" },
+  { "name": "headers", "type": "collection", "label": "Headers" },
+  { "name": "body", "type": "any", "label": "Body" }
+]

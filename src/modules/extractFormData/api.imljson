@@ -1,0 +1,10 @@
+{
+  "url": "/forms/extract-data",
+  "method": "POST",
+  "body": {
+    "documentId": "{{parameters.documentId}}"
+  },
+  "response": {
+    "output": "{{body}}"
+  }
+}

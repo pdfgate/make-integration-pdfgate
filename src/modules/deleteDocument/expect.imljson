@@ -1,0 +1,9 @@
+[
+  {
+    "name": "documentId",
+    "type": "text",
+    "label": "Document ID",
+    "required": true,
+    "help": "ID of the PDFGate document to delete."
+  }
+]

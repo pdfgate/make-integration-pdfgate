@@ -1,0 +1,40 @@
+[
+  {
+    "name": "url",
+    "type": "url",
+    "label": "File URL",
+    "required": true,
+    "help": "Publicly accessible URL of the PDF to upload. PDFGate will fetch and store it."
+  },
+  {
+    "name": "metadata",
+    "type": "array",
+    "label": "Metadata",
+    "help": "Custom key-value metadata stored with the document.",
+    "spec": {
+      "type": "collection",
+      "label": "Metadata Entry",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value",
+          "required": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "preSignedUrlExpiresIn",
+    "type": "number",
+    "label": "Pre-Signed URL Expiry (Seconds)",
+    "default": 3600,
+    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+  }
+]

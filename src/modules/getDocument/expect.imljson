@@ -1,0 +1,16 @@
+[
+  {
+    "name": "documentId",
+    "type": "text",
+    "label": "Document ID",
+    "required": true,
+    "help": "ID of the PDFGate document to retrieve."
+  },
+  {
+    "name": "preSignedUrlExpiresIn",
+    "type": "number",
+    "label": "Pre-Signed URL Expiry (Seconds)",
+    "default": 3600,
+    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+  }
+]

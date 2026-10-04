@@ -1,0 +1,14 @@
+{
+  "baseUrl": "{{if(substring(connection.apiKey, 0, 5) = \"test_\", \"https://api-sandbox.pdfgate.com\", \"https://api.pdfgate.com\")}}",
+  "headers": {
+    "authorization": "Bearer {{connection.apiKey}}"
+  },
+  "response": {
+    "error": {
+      "message": "[{{statusCode}}] {{ifempty(body.message, body.error)}}"
+    }
+  },
+  "log": {
+    "sanitize": ["request.headers.authorization"]
+  }
+}

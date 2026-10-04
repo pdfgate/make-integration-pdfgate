@@ -1,0 +1,23 @@
+{
+  "url": "/envelope",
+  "method": "POST",
+  "body": {
+    "requesterName": "{{parameters.requesterName}}",
+    "documents": "{{parameters.documents}}",
+    "metadata": "{{toCollection(parameters.metadata, 'key', 'value')}}"
+  },
+  "response": {
+    "output": {
+      "envelopeId": "{{body.id}}",
+      "status": "{{body.status}}",
+      "documents": "{{body.documents}}",
+      "createdAt": "{{body.createdAt}}",
+      "expiresAt": "{{body.expiresAt}}",
+      "completedAt": "{{body.completedAt}}",
+      "expiredAt": "{{body.expiredAt}}",
+      "voidedAt": "{{body.voidedAt}}",
+      "voidReason": "{{body.voidReason}}",
+      "metadata": "{{body.metadata}}"
+    }
+  }
+}

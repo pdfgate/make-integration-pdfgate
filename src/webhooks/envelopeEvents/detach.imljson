@@ -1,0 +1,10 @@
+{
+  "url": "{{if(substring(connection.apiKey, 0, 5) = \"test_\", \"https://api-sandbox.pdfgate.com\", \"https://api.pdfgate.com\")}}/webhook/{{webhook.webhookId}}",
+  "method": "DELETE",
+  "headers": {
+    "authorization": "Bearer {{connection.apiKey}}"
+  },
+  "log": {
+    "sanitize": ["request.headers.authorization"]
+  }
+}
