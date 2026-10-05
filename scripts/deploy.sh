@@ -183,6 +183,13 @@ for entry in "${MODULES[@]}"; do
     --module-name="$name" >/dev/null 2>&1 || true
 done
 
+# Modules that exist on Make but are retired (a published app cannot delete modules):
+# keep them hidden so they are not reviewed/approved or shown to users.
+for retired in downloadFile; do
+  mk sdk-modules set-private --app-name="$APP_NAME" --app-version="$APP_VERSION" \
+    --module-name="$retired" >/dev/null 2>&1 || true
+done
+
 # Module groups shown in the scenario builder.
 echo "▶ Groups"
 mk sdk-apps set-section --name="$APP_NAME" --version="$APP_VERSION" \

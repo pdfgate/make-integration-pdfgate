@@ -112,6 +112,9 @@ Groups as shown in the scenario builder (`src/groups.imljson`):
 | Envelopes | Send an envelope | `POST /envelope/{id}/send` |
 | Other | Make an API call | any endpoint, relative path, host prefixed from the key (`test_` → sandbox) |
 
+A published Make app cannot delete modules, so retired modules (currently `downloadFile`) are kept
+**hidden** (`set-private`) by `deploy.sh` and are not part of the reviewed app.
+
 Conventions required by Make's app review (all applied):
 
 - Module outputs are the API response **as is** (`"output": "{{body}}"`); interfaces use the API's
