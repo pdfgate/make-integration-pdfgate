@@ -5,17 +5,43 @@
     "label": "Events",
     "required": true,
     "multiple": true,
-    "default": ["envelope.completed"],
+    "default": [
+      "envelope.completed"
+    ],
     "help": "Envelope events that trigger this scenario.",
     "options": [
-      { "label": "Envelope Sent", "value": "envelope.sent" },
-      { "label": "Envelope Completed", "value": "envelope.completed" },
-      { "label": "Envelope Expired", "value": "envelope.expired" },
-      { "label": "Envelope Voided", "value": "envelope.voided" },
-      { "label": "Envelope Deleted", "value": "envelope.deleted" },
-      { "label": "Envelope Document Completed", "value": "envelope.document.completed" },
-      { "label": "Recipient Activated", "value": "envelope.recipient.activated" },
-      { "label": "Recipient Signed", "value": "envelope.recipient.signed" }
+      {
+        "label": "Envelope sent",
+        "value": "envelope.sent"
+      },
+      {
+        "label": "Envelope completed",
+        "value": "envelope.completed"
+      },
+      {
+        "label": "Envelope expired",
+        "value": "envelope.expired"
+      },
+      {
+        "label": "Envelope voided",
+        "value": "envelope.voided"
+      },
+      {
+        "label": "Envelope deleted",
+        "value": "envelope.deleted"
+      },
+      {
+        "label": "Envelope document completed",
+        "value": "envelope.document.completed"
+      },
+      {
+        "label": "Recipient activated",
+        "value": "envelope.recipient.activated"
+      },
+      {
+        "label": "Recipient signed",
+        "value": "envelope.recipient.signed"
+      }
     ]
   }
 ]

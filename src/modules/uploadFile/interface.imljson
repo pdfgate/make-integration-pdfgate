@@ -1,6 +1,6 @@
 [
   {
-    "name": "documentId",
+    "name": "id",
     "type": "text",
     "label": "Document ID"
   },
@@ -22,7 +22,7 @@
   {
     "name": "size",
     "type": "number",
-    "label": "Size (Bytes)"
+    "label": "Size (bytes)"
   },
   {
     "name": "metadata",
@@ -32,16 +32,16 @@
   {
     "name": "derivedFrom",
     "type": "text",
-    "label": "Derived From Document ID"
+    "label": "Derived from document ID"
   },
   {
     "name": "createdAt",
     "type": "date",
-    "label": "Created At"
+    "label": "Created at"
   },
   {
     "name": "expiresAt",
     "type": "date",
-    "label": "Expires At"
+    "label": "Expires at"
   }
 ]

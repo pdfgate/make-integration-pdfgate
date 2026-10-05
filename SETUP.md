@@ -106,14 +106,14 @@ make-cli sdk-webhooks    list --app-name=pdfgate-plqcq7
 Your private app appears in the scenario builder under **PDFGate**. Use a **`test_…`** API key so
 everything runs against the sandbox (no billing).
 
-### 4a. Connection & a simple action
+### 4a. Connection & a simple action (also test an **invalid** key — the dialog must show `[401] Invalid api key`)
 1. Add a module → search **PDFGate** → **Generate a PDF**.
 2. Create a connection, paste your `test_…` key. The sandbox base URL is selected automatically.
-3. Run once with an `html` or `url` value → confirm the output bundle has `documentId` and `fileUrl`.
+3. Run once with an `html` or `url` value → confirm the output bundle has `id` and `fileUrl`.
 
 ### 4b. Universal module
-- Add **Make an API call**, set `Method = GET`, `URL = /document/{documentId}` (from 4a) → confirm
-  it returns `statusCode` 200 and the document `body`.
+- Add **Make an API call**, set `Method = GET`, `URL = /document/{id}` (from 4a) → confirm it
+  returns `statusCode` 200 and the document `body`. The host is prefixed automatically.
 
 ### 4c. Envelope flow
 1. **Create an Envelope** (a `sourceDocumentId` + recipient), then **Send an Envelope**.
@@ -149,6 +149,14 @@ The function test can be run from the app editor's IML function test runner (or 
    a hook in Make and checking it disappears from the PDFGate dashboard.
 
 ---
+
+## 5b. Review re-submission checklist (from Make's first review, 2026-10-05)
+
+Make asked for test scenarios covering: every module, a connection attempt with an **invalid key**,
+a run that **produces an API error**, and a **webhook delivery** to the instant trigger. The same
+scenario link may be reused for several modules. Module output keys changed to the API's names
+(`id`), so remap `{{n.documentId}}` → `{{n.id}}` and `{{n.envelopeId}}` → `{{n.id}}` in existing
+scenarios before re-running them.
 
 ## 6. Submit for app review
 

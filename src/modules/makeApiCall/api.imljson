@@ -1,5 +1,5 @@
 {
-  "url": "{{parameters.url}}",
+  "url": "{{if(substring(connection.apiKey, 0, 5) = 'test_', 'https://api-sandbox.pdfgate.com', 'https://api.pdfgate.com')}}{{parameters.url}}",
   "method": "{{parameters.method}}",
   "type": "text",
   "qs": {

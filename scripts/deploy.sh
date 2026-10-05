@@ -131,46 +131,63 @@ mk sdk-connections set-section --connection-name="$CONNECTION_NAME" \
   --section=parameters --body="$(body "$SRC/connections/pdfgate/parameters.imljson")"
 
 # ── 3. Modules ──────────────────────────────────────────────────────────────
-# name | typeId | label | description
+# name | typeId | label | description | crud
 # typeId: 4=action, 9=search, 10=instant trigger, 12=universal
+# crud (Make "module action", optional): create | read | update | delete
 MODULES=(
-  "makeApiCall|12|Make an API call|Performs an arbitrary authorized API call."
-  "generatePdf|4|Generate a PDF|Generate a PDF from a URL or raw HTML."
-  "uploadFile|4|Upload a File|Upload a PDF from a public URL so it can be used by other modules."
-  "getDocument|4|Get a Document|Retrieve a stored document by ID."
-  "deleteDocument|4|Delete a Document|Delete a stored document by ID."
-  "compressPdf|4|Compress a PDF|Reduce a PDF's file size."
-  "flattenPdf|4|Flatten a PDF|Flatten an interactive PDF into a static, non-editable PDF."
-  "extractFormData|4|Extract Form Data|Extract form field values from a fillable PDF."
-  "protectPdf|4|Protect a PDF|Encrypt a PDF and apply permission restrictions."
-  "watermarkPdf|4|Watermark a PDF|Apply a text watermark to a PDF."
-  "createEnvelope|4|Create an Envelope|Create a signing envelope from one or more documents."
-  "sendEnvelope|4|Send an Envelope|Send an envelope to its recipients."
-  "getEnvelope|4|Get an Envelope|Retrieve an envelope by ID."
-  "watchEnvelopeEvents|10|Watch Envelope Events|Trigger when an envelope is sent or completed."
+  "watchEnvelopeEvents|10|Watch envelope events|Triggers when an envelope is sent, completed, expired, voided or deleted, when a document in an envelope is completed, or when a recipient is activated or signs.|"
+  "generatePdf|4|Generate a PDF|Generates a PDF from a URL or raw HTML.|create"
+  "compressPdf|4|Compress a PDF|Compresses a PDF to reduce its file size.|"
+  "flattenPdf|4|Flatten a PDF|Flattens an interactive PDF into a static, non-editable PDF.|"
+  "extractFormData|4|Extract form data|Extracts form field values from a fillable PDF.|"
+  "protectPdf|4|Protect a PDF|Encrypts a PDF and applies permission restrictions.|"
+  "watermarkPdf|4|Watermark a PDF|Applies a text watermark to a PDF.|"
+  "getDocument|4|Get a document|Returns information about a document.|read"
+  "downloadFile|4|Download a file|Downloads the PDF file of a document.|read"
+  "uploadFile|4|Upload a file|Uploads a PDF from a public URL or from file data so it can be used by other modules.|create"
+  "deleteDocument|4|Delete a document|Deletes a document.|delete"
+  "getEnvelope|4|Get an envelope|Returns information about an envelope.|read"
+  "createEnvelope|4|Create an envelope|Creates a signing envelope from one or more documents.|create"
+  "sendEnvelope|4|Send an envelope|Sends an envelope to its recipients.|"
+  "makeApiCall|12|Make an API call|Performs an arbitrary authorized API call.|"
 )
 
 for entry in "${MODULES[@]}"; do
-  IFS='|' read -r name typeId label desc <<< "$entry"
+  IFS='|' read -r name typeId label desc crud <<< "$entry"
   dir="$SRC/modules/$name"
   echo "▶ Module: $name (type $typeId)"
 
   try_create sdk-modules create \
     --app-name="$APP_NAME" --app-version="$APP_VERSION" \
-    --name="$name" --type-id="$typeId" --label="$label" --description="$desc"
+    --name="$name" --type-id="$typeId" --label="$label" --description="$desc" >/dev/null
 
-  # Link the connection (instant triggers still authenticate the same way).
+  # Keep label/description in sync and link the connection.
   mk sdk-modules update --app-name="$APP_NAME" --app-version="$APP_VERSION" \
-    --module-name="$name" --connection="$CONNECTION_NAME" >/dev/null 2>&1 || true
+    --module-name="$name" --label="$label" --description="$desc" \
+    --connection="$CONNECTION_NAME" >/dev/null
+
+  # Module action (crud) is not exposed by the CLI.
+  if [[ -n "$crud" ]]; then
+    make_api PATCH "/sdk/apps/$APP_NAME/$APP_VERSION/modules/$name" "{\"crud\":\"$crud\"}" >/dev/null
+  fi
 
   for section in api expect interface; do
     file="$dir/$section.imljson"
     [[ -f "$file" ]] || continue
     echo "   section: $section"
     mk sdk-modules set-section --app-name="$APP_NAME" --app-version="$APP_VERSION" \
-      --module-name="$name" --section="$section" --body="$(body "$file")"
+      --module-name="$name" --section="$section" --body="$(body "$file")" >/dev/null
   done
+
+  # Visible to users (required for approval; hidden modules are not reviewed/approved).
+  mk sdk-modules set-public --app-name="$APP_NAME" --app-version="$APP_VERSION" \
+    --module-name="$name" >/dev/null 2>&1 || true
 done
+
+# Module groups shown in the scenario builder.
+echo "▶ Groups"
+mk sdk-apps set-section --name="$APP_NAME" --version="$APP_VERSION" \
+  --section=groups --body="$(body "$SRC/groups.imljson")" >/dev/null
 
 # ── 4. Custom IML functions ─────────────────────────────────────────────────
 # Make has disabled self-service custom IML functions platform-wide (403

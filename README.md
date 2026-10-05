@@ -93,24 +93,35 @@ make-cli sdk-webhooks    list --app-name=pdfgate-plqcq7
 
 ## Modules
 
-| Type | Module | Endpoint |
-|------|--------|----------|
-| Action | Generate a PDF | `POST /v1/generate/pdf` |
-| Action | Upload a File | `POST /upload` |
-| Action | Get a Document | `GET /document/{id}` |
-| Action | Delete a Document | `DELETE /document/{id}` |
-| Action | Compress a PDF | `POST /compress/pdf` |
-| Action | Flatten a PDF | `POST /forms/flatten` |
-| Action | Extract Form Data | `POST /forms/extract-data` |
-| Action | Protect a PDF | `POST /protect/pdf` |
-| Action | Watermark a PDF | `POST /watermark/pdf` |
-| Action | Create an Envelope | `POST /envelope` |
-| Action | Send an Envelope | `POST /envelope/{id}/send` |
-| Action | Get an Envelope | `GET /envelope/{id}` |
-| Instant trigger | Watch Envelope Events | `POST /webhook` (attach) / `DELETE /webhook/{id}` (detach) |
-| Universal | Make an API call | any endpoint, relative path (satisfies Make's universal-module review requirement) |
+Groups as shown in the scenario builder (`src/groups.imljson`):
 
-The module set mirrors the [`@pdfgate/n8n-nodes-pdfgate`](../n8n-nodes-pdfgate) integration.
+| Group | Module | Endpoint |
+|------|--------|----------|
+| Triggers | Watch envelope events (instant) | `POST /webhook` (attach) / `DELETE /webhook/{id}` (detach) |
+| PDF operations | Generate a PDF | `POST /v1/generate/pdf` |
+| PDF operations | Compress a PDF | `POST /compress/pdf` |
+| PDF operations | Flatten a PDF | `POST /forms/flatten` |
+| PDF operations | Extract form data | `POST /forms/extract-data` |
+| PDF operations | Protect a PDF | `POST /protect/pdf` |
+| PDF operations | Watermark a PDF | `POST /watermark/pdf` |
+| Documents | Get a document | `GET /document/{id}` |
+| Documents | Download a file | `GET /file/{id}` (binary → `name` + `data` buffer) |
+| Documents | Upload a file | `POST /upload` (multipart: public URL **or** file data) |
+| Documents | Delete a document | `DELETE /document/{id}` |
+| Envelopes | Get an envelope | `GET /envelope/{id}` |
+| Envelopes | Create an envelope | `POST /envelope` |
+| Envelopes | Send an envelope | `POST /envelope/{id}/send` |
+| Other | Make an API call | any endpoint, relative path, host prefixed from the key (`test_` → sandbox) |
+
+Conventions required by Make's app review (all applied):
+
+- Module outputs are the API response **as is** (`"output": "{{body}}"`); interfaces use the API's
+  key names (`id`, not `documentId`/`envelopeId`) with labels "Document ID" / "Envelope ID".
+- Labels in sentence case (acronyms kept), descriptions in the third person, module action
+  (`crud`) set for single-purpose modules, every module `public` (visible).
+- Base `timeout` is 300000 ms (Make's maximum); the Generate "Render timeout" is capped to match.
+- Connection `apiKey` is of type `password`; connection errors surface `[status] body.message`.
+- Array parameters use singular item labels and a custom "Add …" button label.
 
 ## Known follow-ups
 
@@ -131,31 +142,32 @@ PDFGate signs every delivery with `x-pdfgate-signature` (HMAC-SHA256, header for
 `t=<ts>,v1=<sig>[,v1=<sig>]`, signed over `` `${ts}.${JSON.stringify(payload)}` ``).
 
 Because Make has disabled self-service custom IML functions (see Known follow-ups), the webhook
-`api` section verifies the signature with **built-in IML only**:
+`api` verifies the signature with **built-in IML only**, computed once in `temp.valid`:
 
 ```
 contains(sig, 'v1=' + sha256(substring(sig, 2, indexOf(sig, ',')) + '.' + createJSON(body), 'hex', data.secret))
 ```
 
-`createJSON(body)` re-serializes the parsed body exactly like the sender's `JSON.stringify`
-(verified byte-for-byte against a live delivery), `sha256(text, 'hex', key)` is Make's HMAC form,
-and `contains` accepts any `v1=` during secret rotation.
+`createJSON(body)` re-serializes the parsed body exactly like the sender's `JSON.stringify` (verified
+byte-for-byte against live deliveries: same length and matching HMAC), `sha256(text, 'hex', key)` is
+Make's HMAC form, and `contains` accepts any `v1=` during secret rotation. A `rawBody` variable is
+**not** available in the webhook runtime — referencing it throws an IML error (tested 2026-10-05), so
+the re-serialization approach is the only byte-exact option without a custom function. `condition` is
+`{{temp.valid}}`; valid deliveries are answered `200 {"message":"OK"}`. When the condition is false
+Make stops before `respond` and answers its default `200 Accepted` with no bundle, so the scenario
+never runs for a bad signature (verified live by replaying signed, tampered and unsigned requests).
 
-> **Instant-trigger module output must be `{{payload}}`.** The webhook `output` builds the bundle;
-> the `watchEnvelopeEvents` module then receives it as `payload`. Using `{{body}}` there yields an
-> empty bundle, so every downstream mapping (e.g. `{{1.envelopeId}}`) resolves to nothing — the
-> symptom is `[404] Cannot GET /envelope/`. Verified live on 2026-10-04.
->
 > **Attach-saved data is `data.*` inside the webhook communication.** Values stored via
-> `response.data` in `attach` (`secret`, `webhookId`) are exposed as `{{data.secret}}` (also
-> `{{parameters.secret}}`) in the webhook `api` section — `{{webhook.*}}` is **empty** there and
-> only works in `detach`. This was confirmed by replaying a logged delivery against a diagnostic
-> webhook definition. Invalid signatures are rejected with HTTP 400 and never trigger the scenario.
+> `response.data` in `attach` (`secret`, `webhookId`) are exposed as `{{data.secret}}` in the
+> webhook `api`; `{{webhook.*}}` is **empty** there and only works in `detach`.
+>
+> **Instant-trigger module output must be `{{payload}}`.** The webhook `output` builds the bundle
+> and the trigger module receives it as `payload`; `{{body}}` yields an empty bundle.
 
-**Trade-off:** the built-in version has no replay window (the 5-minute timestamp check) because
-Make does not document a `now`/`timestamp` keyword for custom-app IML. The full implementation
-with replay protection lives in [`src/functions/verifyPdfgateSignature`](src/functions/verifyPdfgateSignature);
-once Make enables custom IML functions for the app, switch the webhook `api` back to
+**Trade-off:** no replay window (the 5-minute timestamp check), because Make documents no
+`now`/`timestamp` keyword for custom-app IML. The full implementation lives in
+[`src/functions/verifyPdfgateSignature`](src/functions/verifyPdfgateSignature); once Make enables
+custom IML functions for the app, switch the webhook `api` to
 `{{verifyPdfgateSignature(headers.`x-pdfgate-signature`, body, data.secret)}}`.
 
 ## License

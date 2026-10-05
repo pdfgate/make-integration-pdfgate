@@ -1,0 +1,42 @@
+[
+  {
+    "label": "Triggers",
+    "modules": [
+      "watchEnvelopeEvents"
+    ]
+  },
+  {
+    "label": "PDF operations",
+    "modules": [
+      "generatePdf",
+      "compressPdf",
+      "flattenPdf",
+      "extractFormData",
+      "protectPdf",
+      "watermarkPdf"
+    ]
+  },
+  {
+    "label": "Documents",
+    "modules": [
+      "getDocument",
+      "downloadFile",
+      "uploadFile",
+      "deleteDocument"
+    ]
+  },
+  {
+    "label": "Envelopes",
+    "modules": [
+      "getEnvelope",
+      "createEnvelope",
+      "sendEnvelope"
+    ]
+  },
+  {
+    "label": "Other",
+    "modules": [
+      "makeApiCall"
+    ]
+  }
+]

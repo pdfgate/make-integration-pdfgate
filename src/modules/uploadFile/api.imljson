@@ -1,22 +1,19 @@
 {
   "url": "/upload",
   "method": "POST",
+  "type": "multipart/form-data",
   "body": {
-    "url": "{{parameters.url}}",
-    "metadata": "{{toCollection(parameters.metadata, 'key', 'value')}}",
+    "url": "{{if(parameters.source = 'url', parameters.url)}}",
+    "file": {
+      "value": "{{if(parameters.source = 'file', parameters.fileData)}}",
+      "options": {
+        "filename": "{{parameters.fileName}}"
+      }
+    },
+    "metadata": "{{if(length(parameters.metadata) > 0, createJSON(toCollection(parameters.metadata, 'key', 'value')))}}",
     "preSignedUrlExpiresIn": "{{parameters.preSignedUrlExpiresIn}}"
   },
   "response": {
-    "output": {
-      "documentId": "{{body.id}}",
-      "status": "{{body.status}}",
-      "type": "{{body.type}}",
-      "fileUrl": "{{body.fileUrl}}",
-      "size": "{{body.size}}",
-      "metadata": "{{body.metadata}}",
-      "derivedFrom": "{{body.derivedFrom}}",
-      "createdAt": "{{body.createdAt}}",
-      "expiresAt": "{{body.expiresAt}}"
-    }
+    "output": "{{body}}"
   }
 }

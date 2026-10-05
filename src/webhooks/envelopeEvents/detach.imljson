@@ -5,6 +5,8 @@
     "authorization": "Bearer {{connection.apiKey}}"
   },
   "log": {
-    "sanitize": ["request.headers.authorization"]
+    "sanitize": [
+      "request.headers.authorization"
+    ]
   }
 }

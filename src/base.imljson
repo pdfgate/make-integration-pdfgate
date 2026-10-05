@@ -9,6 +9,9 @@
     }
   },
   "log": {
-    "sanitize": ["request.headers.authorization"]
-  }
+    "sanitize": [
+      "request.headers.authorization"
+    ]
+  },
+  "timeout": 300000
 }

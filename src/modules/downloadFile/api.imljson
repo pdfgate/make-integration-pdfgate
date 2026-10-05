@@ -1,0 +1,11 @@
+{
+  "url": "/file/{{parameters.documentId}}",
+  "method": "GET",
+  "response": {
+    "type": "binary",
+    "output": {
+      "name": "{{ifempty(parameters.fileName, parameters.documentId + '.pdf')}}",
+      "data": "{{body}}"
+    }
+  }
+}

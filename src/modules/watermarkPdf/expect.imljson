@@ -9,7 +9,7 @@
   {
     "name": "text",
     "type": "text",
-    "label": "Watermark Text",
+    "label": "Watermark text",
     "required": true,
     "help": "Text to overlay on the PDF as a watermark."
   },
@@ -19,26 +19,91 @@
     "label": "Font",
     "default": "helvetica",
     "options": [
-      { "label": "Courier", "value": "courier" },
-      { "label": "Courier Bold", "value": "courier-bold" },
-      { "label": "Courier Bold Oblique", "value": "courier-boldoblique" },
-      { "label": "Courier Oblique", "value": "courier-oblique" },
-      { "label": "Helvetica", "value": "helvetica" },
-      { "label": "Helvetica Bold", "value": "helvetica-bold" },
-      { "label": "Helvetica Bold Oblique", "value": "helvetica-boldoblique" },
-      { "label": "Helvetica Oblique", "value": "helvetica-oblique" },
-      { "label": "Times Bold", "value": "times-bold" },
-      { "label": "Times Bold Italic", "value": "times-bolditalic" },
-      { "label": "Times Italic", "value": "times-italic" },
-      { "label": "Times Roman", "value": "times-roman" }
+      {
+        "label": "Courier",
+        "value": "courier"
+      },
+      {
+        "label": "Courier Bold",
+        "value": "courier-bold"
+      },
+      {
+        "label": "Courier Bold Oblique",
+        "value": "courier-boldoblique"
+      },
+      {
+        "label": "Courier Oblique",
+        "value": "courier-oblique"
+      },
+      {
+        "label": "Helvetica",
+        "value": "helvetica"
+      },
+      {
+        "label": "Helvetica Bold",
+        "value": "helvetica-bold"
+      },
+      {
+        "label": "Helvetica Bold Oblique",
+        "value": "helvetica-boldoblique"
+      },
+      {
+        "label": "Helvetica Oblique",
+        "value": "helvetica-oblique"
+      },
+      {
+        "label": "Times Bold",
+        "value": "times-bold"
+      },
+      {
+        "label": "Times Bold Italic",
+        "value": "times-bolditalic"
+      },
+      {
+        "label": "Times Italic",
+        "value": "times-italic"
+      },
+      {
+        "label": "Times Roman",
+        "value": "times-roman"
+      }
     ]
   },
-  { "name": "fontSize", "type": "number", "label": "Font Size (Pt)" },
-  { "name": "fontColor", "type": "text", "label": "Font Color", "help": "Hex (e.g. #FF0000) or rgb (e.g. rgb(255,0,0))." },
-  { "name": "opacity", "type": "number", "label": "Opacity", "help": "0 (invisible) to 1 (fully opaque)." },
-  { "name": "rotate", "type": "number", "label": "Rotation (Degrees)", "help": "0–360." },
-  { "name": "xPosition", "type": "number", "label": "X Position (Points)", "help": "Leave empty to center." },
-  { "name": "yPosition", "type": "number", "label": "Y Position (Points)", "help": "Leave empty to center." },
+  {
+    "name": "fontSize",
+    "type": "number",
+    "label": "Font size (pt)"
+  },
+  {
+    "name": "fontColor",
+    "type": "text",
+    "label": "Font color",
+    "help": "Hex (e.g. #FF0000) or rgb (e.g. rgb(255,0,0))."
+  },
+  {
+    "name": "opacity",
+    "type": "number",
+    "label": "Opacity",
+    "help": "0 (invisible) to 1 (fully opaque)."
+  },
+  {
+    "name": "rotate",
+    "type": "number",
+    "label": "Rotation (degrees)",
+    "help": "0–360."
+  },
+  {
+    "name": "xPosition",
+    "type": "number",
+    "label": "X position (points)",
+    "help": "Leave empty to center."
+  },
+  {
+    "name": "yPosition",
+    "type": "number",
+    "label": "Y position (points)",
+    "help": "Leave empty to center."
+  },
   {
     "name": "metadata",
     "type": "array",
@@ -46,7 +111,7 @@
     "help": "Custom key-value metadata stored with the document.",
     "spec": {
       "type": "collection",
-      "label": "Metadata Entry",
+      "label": "Metadata item",
       "spec": [
         {
           "name": "key",
@@ -61,13 +126,20 @@
           "required": true
         }
       ]
+    },
+    "labels": {
+      "add": "Add a metadata item"
     }
   },
   {
     "name": "preSignedUrlExpiresIn",
     "type": "number",
-    "label": "Pre-Signed URL Expiry (Seconds)",
+    "label": "Pre-signed URL expiry (seconds)",
     "default": 3600,
-    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+    "help": "How long the returned fileUrl stays valid, between 60 and 86400 seconds (24 hours).",
+    "validate": {
+      "min": 60,
+      "max": 86400
+    }
   }
 ]

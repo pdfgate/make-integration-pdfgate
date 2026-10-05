@@ -9,29 +9,55 @@
   {
     "name": "algorithm",
     "type": "select",
-    "label": "Encryption Algorithm",
+    "label": "Encryption algorithm",
     "default": "AES256",
     "options": [
-      { "label": "AES-256 (Recommended)", "value": "AES256" },
-      { "label": "AES-128", "value": "AES128" }
+      {
+        "label": "AES-256 (recommended)",
+        "value": "AES256"
+      },
+      {
+        "label": "AES-128",
+        "value": "AES128"
+      }
     ]
   },
   {
     "name": "userPassword",
     "type": "text",
-    "label": "User Password",
-    "help": "Password required to open the PDF."
+    "label": "User password",
+    "help": "Password required to open the PDF. With AES-256 you must also set an owner password."
   },
   {
     "name": "ownerPassword",
     "type": "text",
-    "label": "Owner Password",
-    "help": "Password that grants full control (modifying permissions, removing restrictions)."
+    "label": "Owner password",
+    "help": "Password that grants full control (changing permissions, removing restrictions). Required when the encryption algorithm is AES-256 and a user password is set; otherwise optional."
   },
-  { "name": "disableEditing", "type": "boolean", "label": "Disable Editing", "default": false },
-  { "name": "disableCopy", "type": "boolean", "label": "Disable Copy / Extract", "default": false },
-  { "name": "disablePrint", "type": "boolean", "label": "Disable Printing", "default": false },
-  { "name": "encryptMetadata", "type": "boolean", "label": "Encrypt Metadata", "default": false },
+  {
+    "name": "disableEditing",
+    "type": "boolean",
+    "label": "Disable editing",
+    "default": false
+  },
+  {
+    "name": "disableCopy",
+    "type": "boolean",
+    "label": "Disable copy / extract",
+    "default": false
+  },
+  {
+    "name": "disablePrint",
+    "type": "boolean",
+    "label": "Disable printing",
+    "default": false
+  },
+  {
+    "name": "encryptMetadata",
+    "type": "boolean",
+    "label": "Encrypt metadata",
+    "default": false
+  },
   {
     "name": "metadata",
     "type": "array",
@@ -39,7 +65,7 @@
     "help": "Custom key-value metadata stored with the document.",
     "spec": {
       "type": "collection",
-      "label": "Metadata Entry",
+      "label": "Metadata item",
       "spec": [
         {
           "name": "key",
@@ -54,13 +80,20 @@
           "required": true
         }
       ]
+    },
+    "labels": {
+      "add": "Add a metadata item"
     }
   },
   {
     "name": "preSignedUrlExpiresIn",
     "type": "number",
-    "label": "Pre-Signed URL Expiry (Seconds)",
+    "label": "Pre-signed URL expiry (seconds)",
     "default": 3600,
-    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+    "help": "How long the returned fileUrl stays valid, between 60 and 86400 seconds (24 hours).",
+    "validate": {
+      "min": 60,
+      "max": 86400
+    }
   }
 ]

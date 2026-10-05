@@ -2,17 +2,6 @@
   "url": "/envelope/{{parameters.envelopeId}}/send",
   "method": "POST",
   "response": {
-    "output": {
-      "envelopeId": "{{body.id}}",
-      "status": "{{body.status}}",
-      "documents": "{{body.documents}}",
-      "createdAt": "{{body.createdAt}}",
-      "expiresAt": "{{body.expiresAt}}",
-      "completedAt": "{{body.completedAt}}",
-      "expiredAt": "{{body.expiredAt}}",
-      "voidedAt": "{{body.voidedAt}}",
-      "voidReason": "{{body.voidReason}}",
-      "metadata": "{{body.metadata}}"
-    }
+    "output": "{{body}}"
   }
 }

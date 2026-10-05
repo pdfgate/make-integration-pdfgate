@@ -6,10 +6,12 @@
   },
   "response": {
     "error": {
-      "message": "Invalid PDFGate API key ([{{statusCode}}])."
+      "message": "[{{statusCode}}] {{ifempty(body.message, 'Invalid PDFGate API key.')}}"
     }
   },
   "log": {
-    "sanitize": ["request.headers.authorization"]
+    "sanitize": [
+      "request.headers.authorization"
+    ]
   }
 }

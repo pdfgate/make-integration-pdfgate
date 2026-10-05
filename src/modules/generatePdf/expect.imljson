@@ -8,13 +8,14 @@
   {
     "name": "html",
     "type": "text",
-    "label": "HTML Content",
-    "help": "Raw HTML markup to convert to a PDF. Required if URL is empty."
+    "label": "HTML content",
+    "help": "Raw HTML markup to convert to a PDF. Required if URL is empty.",
+    "multiline": true
   },
   {
     "name": "pageSizeType",
     "type": "select",
-    "label": "Page Size",
+    "label": "Page size",
     "default": "a4",
     "help": "Ignored when Custom Width and Custom Height are set.",
     "options": [
@@ -67,13 +68,13 @@
   {
     "name": "width",
     "type": "number",
-    "label": "Custom Width (px)",
+    "label": "Custom width (px)",
     "help": "Custom PDF width in pixels. Must be set together with Custom Height; overrides Page Size."
   },
   {
     "name": "height",
     "type": "number",
-    "label": "Custom Height (px)",
+    "label": "Custom height (px)",
     "help": "Custom PDF height in pixels. Must be set together with Custom Width; overrides Page Size."
   },
   {
@@ -95,21 +96,21 @@
   {
     "name": "printBackground",
     "type": "boolean",
-    "label": "Print Backgrounds",
+    "label": "Print backgrounds",
     "default": true,
     "help": "Include background graphics when enabled."
   },
   {
     "name": "enableFormFields",
     "type": "boolean",
-    "label": "Enable Fillable Form Fields",
+    "label": "Enable fillable form fields",
     "default": false,
     "help": "Include interactive form fields (text inputs, checkboxes, etc.) in the PDF. Supports standard form tags plus <pdfgate-signature-field /> for digital signatures."
   },
   {
     "name": "scale",
     "type": "number",
-    "label": "Page Scale",
+    "label": "Page scale",
     "help": "Page scale factor between 0.1 and 2. Default 1.",
     "validate": {
       "min": 0.1,
@@ -119,7 +120,7 @@
   {
     "name": "pageRanges",
     "type": "text",
-    "label": "Page Ranges",
+    "label": "Page ranges",
     "help": "Pages to include, e.g. 1-5 or 1,3,5. Leave empty for all pages.",
     "validate": {
       "pattern": "^(\\d+(-\\d+)?)(,\\d+(-\\d+)?)*$"
@@ -129,46 +130,48 @@
     "name": "header",
     "type": "text",
     "label": "Header HTML",
-    "help": "HTML rendered as the page header on every page. Requires Margin Top. Supports dynamic classes: date, title, url, pageNumber, totalPages."
+    "help": "HTML rendered as the page header on every page. Requires Margin Top. Supports dynamic classes: date, title, url, pageNumber, totalPages.",
+    "multiline": true
   },
   {
     "name": "footer",
     "type": "text",
     "label": "Footer HTML",
-    "help": "HTML rendered as the page footer on every page. Requires Margin Bottom (e.g. 80px). Supports dynamic classes: date, title, url, pageNumber, totalPages."
+    "help": "HTML rendered as the page footer on every page. Requires Margin Bottom (e.g. 80px). Supports dynamic classes: date, title, url, pageNumber, totalPages.",
+    "multiline": true
   },
   {
     "name": "marginTop",
     "type": "text",
-    "label": "Margin Top",
+    "label": "Margin top",
     "help": "e.g. 20px, 1cm, 10mm"
   },
   {
     "name": "marginBottom",
     "type": "text",
-    "label": "Margin Bottom",
+    "label": "Margin bottom",
     "help": "e.g. 20px, 1cm, 10mm"
   },
   {
     "name": "marginLeft",
     "type": "text",
-    "label": "Margin Left",
+    "label": "Margin left",
     "help": "e.g. 20px, 1cm, 10mm"
   },
   {
     "name": "marginRight",
     "type": "text",
-    "label": "Margin Right",
+    "label": "Margin right",
     "help": "e.g. 20px, 1cm, 10mm"
   },
   {
     "name": "metadata",
     "type": "array",
     "label": "Metadata",
-    "help": "Custom key-value data attached to the document record.",
+    "help": "Custom key-value metadata stored with the document.",
     "spec": {
       "type": "collection",
-      "label": "Metadata Entry",
+      "label": "Metadata item",
       "spec": [
         {
           "name": "key",
@@ -183,14 +186,17 @@
           "required": true
         }
       ]
+    },
+    "labels": {
+      "add": "Add a metadata item"
     }
   },
   {
     "name": "preSignedUrlExpiresIn",
     "type": "number",
-    "label": "Pre-Signed URL Expiry (Seconds)",
+    "label": "Pre-signed URL expiry (seconds)",
     "default": 3600,
-    "help": "How long the returned fileUrl stays valid (60–86400 seconds).",
+    "help": "How long the returned fileUrl stays valid, between 60 and 86400 seconds (24 hours).",
     "validate": {
       "min": 60,
       "max": 86400
@@ -199,7 +205,7 @@
   {
     "name": "emulateMediaType",
     "type": "select",
-    "label": "Emulate Media Type",
+    "label": "Emulate media type",
     "advanced": true,
     "help": "Force a CSS media type when rendering.",
     "options": [
@@ -218,33 +224,35 @@
     "type": "text",
     "label": "Inject CSS",
     "advanced": true,
-    "help": "CSS injected after the page loads and after Wait For / Click Selector actions run."
+    "help": "CSS injected after the page loads and after Wait For / Click Selector actions run.",
+    "multiline": true
   },
   {
     "name": "javascript",
     "type": "text",
     "label": "Inject JavaScript",
     "advanced": true,
-    "help": "JavaScript injected after the page loads and after Wait For / Click Selector actions run."
+    "help": "JavaScript injected after the page loads and after Wait For / Click Selector actions run.",
+    "multiline": true
   },
   {
     "name": "waitForSelector",
     "type": "text",
-    "label": "Wait For CSS Selector",
+    "label": "Wait for CSS selector",
     "advanced": true,
     "help": "Wait for this CSS selector to appear before rendering. Times out after 30 seconds."
   },
   {
     "name": "clickSelector",
     "type": "text",
-    "label": "Click CSS Selector",
+    "label": "Click CSS selector",
     "advanced": true,
     "help": "Wait for and click this CSS selector before rendering."
   },
   {
     "name": "waitForNetworkIdle",
     "type": "boolean",
-    "label": "Wait For Network Idle",
+    "label": "Wait for network idle",
     "advanced": true,
     "default": false,
     "help": "Wait during page load until there are no open network connections."
@@ -252,7 +260,7 @@
   {
     "name": "loadImages",
     "type": "boolean",
-    "label": "Load Images",
+    "label": "Load images",
     "advanced": true,
     "default": false,
     "help": "Wait for all images to finish loading before capturing."
@@ -260,7 +268,7 @@
   {
     "name": "delay",
     "type": "number",
-    "label": "Render Delay (ms)",
+    "label": "Render delay (ms)",
     "advanced": true,
     "help": "Delay in milliseconds before rendering the PDF. Maximum 20000 (20 seconds).",
     "validate": {
@@ -271,12 +279,12 @@
   {
     "name": "timeout",
     "type": "number",
-    "label": "Render Timeout (ms)",
+    "label": "Render timeout (ms)",
     "advanced": true,
-    "help": "Maximum time in milliseconds to wait for the page to load before the request fails. Default 900000 (15 minutes).",
+    "help": "Maximum time in milliseconds to wait for the page to load before the request fails. Make waits at most 300000 ms (5 minutes) for a response, so larger values are not useful here.",
     "validate": {
       "min": 0,
-      "max": 900000
+      "max": 300000
     }
   },
   {
@@ -309,18 +317,18 @@
   {
     "name": "userAgent",
     "type": "text",
-    "label": "User Agent",
+    "label": "User agent",
     "advanced": true,
     "help": "Custom user agent string used when fetching the page."
   },
   {
     "name": "httpHeaders",
     "type": "array",
-    "label": "HTTP Headers",
+    "label": "HTTP headers",
     "help": "Custom HTTP headers sent when fetching the page.",
     "spec": {
       "type": "collection",
-      "label": "HTTP Headers Entry",
+      "label": "Header",
       "spec": [
         {
           "name": "key",
@@ -336,12 +344,15 @@
         }
       ]
     },
-    "advanced": true
+    "advanced": true,
+    "labels": {
+      "add": "Add a header"
+    }
   },
   {
     "name": "authentication",
     "type": "collection",
-    "label": "HTTP Basic Authentication",
+    "label": "HTTP basic authentication",
     "advanced": true,
     "help": "HTTP authentication for protected pages. Only supported when rendering a URL, not raw HTML.",
     "spec": [

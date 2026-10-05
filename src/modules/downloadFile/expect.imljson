@@ -1,0 +1,16 @@
+[
+  {
+    "name": "documentId",
+    "type": "text",
+    "label": "Document ID",
+    "required": true,
+    "help": "ID of the PDFGate document whose PDF file you want to download."
+  },
+  {
+    "name": "fileName",
+    "type": "filename",
+    "label": "File name",
+    "help": "Name for the downloaded file. Defaults to `<document ID>.pdf`.",
+    "semantic": "file:name"
+  }
+]

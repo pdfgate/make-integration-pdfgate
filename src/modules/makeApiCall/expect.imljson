@@ -4,7 +4,7 @@
     "type": "text",
     "label": "URL",
     "required": true,
-    "help": "Enter a path relative to the PDFGate API base URL (chosen automatically from your key: sandbox for `test_`, production for `live_`). For example: `/v1/generate/pdf`."
+    "help": "Enter a path relative to `https://api.pdfgate.com` (or `https://api-sandbox.pdfgate.com` when your key starts with `test_`; the host is chosen automatically). For example: `/v1/generate/pdf`."
   },
   {
     "name": "method",
@@ -13,11 +13,26 @@
     "required": true,
     "default": "GET",
     "options": [
-      { "label": "GET", "value": "GET" },
-      { "label": "POST", "value": "POST" },
-      { "label": "PUT", "value": "PUT" },
-      { "label": "PATCH", "value": "PATCH" },
-      { "label": "DELETE", "value": "DELETE" }
+      {
+        "label": "GET",
+        "value": "GET"
+      },
+      {
+        "label": "POST",
+        "value": "POST"
+      },
+      {
+        "label": "PUT",
+        "value": "PUT"
+      },
+      {
+        "label": "PATCH",
+        "value": "PATCH"
+      },
+      {
+        "label": "DELETE",
+        "value": "DELETE"
+      }
     ]
   },
   {
@@ -25,22 +40,55 @@
     "type": "array",
     "label": "Headers",
     "help": "You don't have to add authorization headers; we already did that for you.",
-    "spec": [
-      { "name": "key", "type": "text", "label": "Key" },
-      { "name": "value", "type": "text", "label": "Value" }
-    ],
+    "spec": {
+      "type": "collection",
+      "label": "Header",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key"
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value"
+        }
+      ]
+    },
     "default": [
-      { "key": "Content-Type", "value": "application/json" }
-    ]
+      {
+        "key": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "labels": {
+      "add": "Add a header"
+    }
   },
   {
     "name": "qs",
     "type": "array",
-    "label": "Query String",
-    "spec": [
-      { "name": "key", "type": "text", "label": "Key" },
-      { "name": "value", "type": "text", "label": "Value" }
-    ]
+    "label": "Query string",
+    "spec": {
+      "type": "collection",
+      "label": "Query parameter",
+      "spec": [
+        {
+          "name": "key",
+          "type": "text",
+          "label": "Key"
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "label": "Value"
+        }
+      ]
+    },
+    "labels": {
+      "add": "Add a query parameter"
+    }
   },
   {
     "name": "body",

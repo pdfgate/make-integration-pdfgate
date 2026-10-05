@@ -15,11 +15,6 @@
     "label": "Timestamp"
   },
   {
-    "name": "envelopeId",
-    "type": "text",
-    "label": "Envelope ID"
-  },
-  {
     "name": "resource",
     "type": "collection",
     "label": "Resource",
@@ -71,17 +66,17 @@
                 {
                   "name": "sourceDocumentId",
                   "type": "text",
-                  "label": "Source Document ID"
+                  "label": "Source document ID"
                 },
                 {
                   "name": "signedDocumentId",
                   "type": "text",
-                  "label": "Signed Document ID"
+                  "label": "Signed document ID"
                 },
                 {
                   "name": "auditLogDocumentId",
                   "type": "text",
-                  "label": "Audit Log Document ID"
+                  "label": "Audit log document ID"
                 },
                 {
                   "name": "status",
@@ -91,7 +86,7 @@
                 {
                   "name": "completedAt",
                   "type": "date",
-                  "label": "Completed At"
+                  "label": "Completed at"
                 },
                 {
                   "name": "recipients",
@@ -123,7 +118,7 @@
                       {
                         "name": "signingOrder",
                         "type": "number",
-                        "label": "Signing Order"
+                        "label": "Signing order"
                       },
                       {
                         "name": "status",
@@ -133,27 +128,27 @@
                       {
                         "name": "activatedAt",
                         "type": "date",
-                        "label": "Activated At"
+                        "label": "Activated at"
                       },
                       {
                         "name": "viewedAt",
                         "type": "date",
-                        "label": "Viewed At"
+                        "label": "Viewed at"
                       },
                       {
                         "name": "signedAt",
                         "type": "date",
-                        "label": "Signed At"
+                        "label": "Signed at"
                       },
                       {
                         "name": "signingLink",
                         "type": "url",
-                        "label": "Signing Link"
+                        "label": "Signing link"
                       },
                       {
                         "name": "previewLink",
                         "type": "url",
-                        "label": "Preview Link"
+                        "label": "Preview link"
                       },
                       {
                         "name": "fields",
@@ -195,12 +190,12 @@
                             {
                               "name": "userValue",
                               "type": "text",
-                              "label": "User Value"
+                              "label": "User value"
                             },
                             {
                               "name": "userTimezone",
                               "type": "text",
-                              "label": "User Timezone"
+                              "label": "User timezone"
                             }
                           ]
                         }
@@ -214,32 +209,32 @@
           {
             "name": "createdAt",
             "type": "date",
-            "label": "Created At"
+            "label": "Created at"
           },
           {
             "name": "expiresAt",
             "type": "date",
-            "label": "Expires At"
+            "label": "Expires at"
           },
           {
             "name": "completedAt",
             "type": "date",
-            "label": "Completed At"
+            "label": "Completed at"
           },
           {
             "name": "expiredAt",
             "type": "date",
-            "label": "Expired At"
+            "label": "Expired at"
           },
           {
             "name": "voidedAt",
             "type": "date",
-            "label": "Voided At"
+            "label": "Voided at"
           },
           {
             "name": "voidReason",
             "type": "text",
-            "label": "Void Reason"
+            "label": "Void reason"
           },
           {
             "name": "metadata",
@@ -251,27 +246,27 @@
       {
         "name": "envelopeId",
         "type": "text",
-        "label": "Envelope ID (Document Completed)"
+        "label": "Envelope ID (document completed)"
       },
       {
         "name": "sourceDocumentId",
         "type": "text",
-        "label": "Source Document ID (Document Completed)"
+        "label": "Source document ID (document completed)"
       },
       {
         "name": "signedDocumentId",
         "type": "text",
-        "label": "Signed Document ID (Document Completed)"
+        "label": "Signed document ID (document completed)"
       },
       {
         "name": "auditLogDocumentId",
         "type": "text",
-        "label": "Audit Log Document ID (Document Completed)"
+        "label": "Audit log document ID (document completed)"
       },
       {
         "name": "documentStatus",
         "type": "text",
-        "label": "Document Status (Document Completed)"
+        "label": "Document status (document completed)"
       }
     ]
   }

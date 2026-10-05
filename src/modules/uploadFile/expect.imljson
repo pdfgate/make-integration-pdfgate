@@ -1,10 +1,48 @@
 [
   {
-    "name": "url",
-    "type": "url",
-    "label": "File URL",
+    "name": "source",
+    "type": "select",
+    "label": "Source",
     "required": true,
-    "help": "Publicly accessible URL of the PDF to upload. PDFGate will fetch and store it."
+    "default": "url",
+    "help": "Import the PDF from a public URL, or upload file data coming from another module.",
+    "options": [
+      {
+        "label": "Public URL",
+        "value": "url",
+        "nested": [
+          {
+            "name": "url",
+            "type": "url",
+            "label": "File URL",
+            "required": true,
+            "help": "Public URL of the PDF to import."
+          }
+        ]
+      },
+      {
+        "label": "File data",
+        "value": "file",
+        "nested": [
+          {
+            "name": "fileName",
+            "type": "filename",
+            "label": "File name",
+            "required": true,
+            "semantic": "file:name",
+            "help": "Name of the PDF file, e.g. `contract.pdf`."
+          },
+          {
+            "name": "fileData",
+            "type": "buffer",
+            "label": "Data",
+            "required": true,
+            "semantic": "file:data",
+            "help": "Binary content of the PDF, mapped from a previous module."
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "metadata",
@@ -13,7 +51,7 @@
     "help": "Custom key-value metadata stored with the document.",
     "spec": {
       "type": "collection",
-      "label": "Metadata Entry",
+      "label": "Metadata item",
       "spec": [
         {
           "name": "key",
@@ -28,13 +66,20 @@
           "required": true
         }
       ]
+    },
+    "labels": {
+      "add": "Add a metadata item"
     }
   },
   {
     "name": "preSignedUrlExpiresIn",
     "type": "number",
-    "label": "Pre-Signed URL Expiry (Seconds)",
+    "label": "Pre-signed URL expiry (seconds)",
     "default": 3600,
-    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+    "help": "How long the returned fileUrl stays valid, between 60 and 86400 seconds (24 hours).",
+    "validate": {
+      "min": 60,
+      "max": 86400
+    }
   }
 ]

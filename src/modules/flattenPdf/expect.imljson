@@ -13,7 +13,7 @@
     "help": "Custom key-value metadata stored with the document.",
     "spec": {
       "type": "collection",
-      "label": "Metadata Entry",
+      "label": "Metadata item",
       "spec": [
         {
           "name": "key",
@@ -28,13 +28,20 @@
           "required": true
         }
       ]
+    },
+    "labels": {
+      "add": "Add a metadata item"
     }
   },
   {
     "name": "preSignedUrlExpiresIn",
     "type": "number",
-    "label": "Pre-Signed URL Expiry (Seconds)",
+    "label": "Pre-signed URL expiry (seconds)",
     "default": 3600,
-    "help": "How long the returned fileUrl stays valid (60–86400 seconds)."
+    "help": "How long the returned fileUrl stays valid, between 60 and 86400 seconds (24 hours).",
+    "validate": {
+      "min": 60,
+      "max": 86400
+    }
   }
 ]
