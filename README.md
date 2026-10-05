@@ -105,7 +105,7 @@ Groups as shown in the scenario builder (`src/groups.imljson`):
 | PDF operations | Protect a PDF | `POST /protect/pdf` |
 | PDF operations | Watermark a PDF | `POST /watermark/pdf` |
 | Documents | Get a document | `GET /document/{id}` |
-| Documents | Upload a file | `POST /upload` (multipart: public URL **or** file data) |
+| Documents | Upload a file | `POST /upload` (public URL) |
 | Documents | Delete a document | `DELETE /document/{id}` |
 | Envelopes | Get an envelope | `GET /envelope/{id}` |
 | Envelopes | Create an envelope | `POST /envelope` |

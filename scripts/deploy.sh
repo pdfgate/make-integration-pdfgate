@@ -143,7 +143,7 @@ MODULES=(
   "protectPdf|4|Protect a PDF|Encrypts a PDF and applies permission restrictions.|"
   "watermarkPdf|4|Watermark a PDF|Applies a text watermark to a PDF.|"
   "getDocument|4|Get a document|Returns information about a document.|read"
-  "uploadFile|4|Upload a file|Uploads a PDF from a public URL or from file data so it can be used by other modules.|create"
+  "uploadFile|4|Upload a file|Uploads a PDF from a public URL so it can be used by other modules.|create"
   "deleteDocument|4|Delete a document|Deletes a document.|delete"
   "getEnvelope|4|Get an envelope|Returns information about an envelope.|read"
   "createEnvelope|4|Create an envelope|Creates a signing envelope from one or more documents.|create"

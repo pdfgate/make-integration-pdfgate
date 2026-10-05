@@ -1,16 +1,9 @@
 {
   "url": "/upload",
   "method": "POST",
-  "type": "multipart/form-data",
   "body": {
-    "url": "{{if(parameters.source = 'url', parameters.url)}}",
-    "file": {
-      "value": "{{if(parameters.source = 'file', parameters.fileData)}}",
-      "options": {
-        "filename": "{{parameters.fileName}}"
-      }
-    },
-    "metadata": "{{if(length(parameters.metadata) > 0, createJSON(toCollection(parameters.metadata, 'key', 'value')))}}",
+    "url": "{{parameters.url}}",
+    "metadata": "{{toCollection(parameters.metadata, 'key', 'value')}}",
     "preSignedUrlExpiresIn": "{{parameters.preSignedUrlExpiresIn}}"
   },
   "response": {

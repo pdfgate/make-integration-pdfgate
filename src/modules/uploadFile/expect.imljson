@@ -1,48 +1,10 @@
 [
   {
-    "name": "source",
-    "type": "select",
-    "label": "Source",
+    "name": "url",
+    "type": "url",
+    "label": "File URL",
     "required": true,
-    "default": "url",
-    "help": "Import the PDF from a public URL, or upload file data coming from another module.",
-    "options": [
-      {
-        "label": "Public URL",
-        "value": "url",
-        "nested": [
-          {
-            "name": "url",
-            "type": "url",
-            "label": "File URL",
-            "required": true,
-            "help": "Public URL of the PDF to import."
-          }
-        ]
-      },
-      {
-        "label": "File data",
-        "value": "file",
-        "nested": [
-          {
-            "name": "fileName",
-            "type": "filename",
-            "label": "File name",
-            "required": true,
-            "semantic": "file:name",
-            "help": "Name of the PDF file, e.g. `contract.pdf`."
-          },
-          {
-            "name": "fileData",
-            "type": "buffer",
-            "label": "Data",
-            "required": true,
-            "semantic": "file:data",
-            "help": "Binary content of the PDF, mapped from a previous module."
-          }
-        ]
-      }
-    ]
+    "help": "Public URL of the PDF to import."
   },
   {
     "name": "metadata",
